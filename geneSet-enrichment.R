@@ -1,11 +1,11 @@
 # ————————————————————————————————————————————————————————————————————————————————
-#    Code:         geneSet-enrichment.R
-#    Author:       Amal Katrib
-#    Use:           Conduct gene-set enrichment analysis using Enrichr's curated
-#                       list of public libraries to draw biological insights
-#     Prereqs:    [ "gene.txt" ]:  genes of interest, saved in the appropriate folder
-#                       [ similar genes ]:  spatially-correlated genes, saved in the appropriate folder
-#                       [ online analysis ]:  www.Enrichr.com, to analyze & download enrichment results#
+# Code:       geneSet-enrichment.R
+# Author:     Amal Katrib
+# Use:         Conduct gene-set enrichment analysis using Enrichr's curated
+#                  list of public libraries to draw biological insights
+# Prereqs:    [ "gene.txt" ]:  genes of interest, saved in the appropriate folder
+#                   [ similar genes ]:  spatially-correlated genes, saved in the appropriate folder
+#                   [ online analysis ]:  Enrichr.com, to analyze & download enrichment results
 #
 # ————————————————————————————————————————————————————————————————————————————————
 rm( list = ls (all = TRUE))
@@ -17,7 +17,7 @@ library(stringr)
 library(enrichR)
 
 # ------------------------------------------------------
-#       MANUAL INPUT
+#  MANUAL INPUT
 # ------------------------------------------------------
 type = "a" # specify which dataset to analyze, selecting from: "a", "b", "c"
 
@@ -36,7 +36,7 @@ c1 = 10      # combined Score = log(p-value) * z.score
 d = 0.25     # limit # of findings from one single database by removing those in the bottom x% for combined score
 
 # ------------------------------------------------------
-#       DATA INPUT
+#  DATA INPUT
 # ..............
 setwd(dirAnalysis)
 # ------------------------------------------------------
@@ -45,7 +45,7 @@ genes = read.table("genes.txt"())
 genes = genes[,1] %>% unique() %>% sort
 
 # ------------------------------------------------------
-#       PRELIMINARY DATA ANALYSIS
+#  PRELIMINARY DATA ANALYSIS
 # ------------------------------------------------------
 # load genes with similar spatial expression (from prior analysis))
 genes.similar = list.files(path = dirAnalysis, full.names = T)
@@ -67,7 +67,7 @@ genes.similar = lapply(seq_along(genes.similar), function(i) c(names(genes.simil
 names(genes.similar) = names
 
 # --------------------------------------------------
-#       ENRICHR GENE-SET ENRICHMENT ANALYSIS
+#  GENE-SET ENRICHMENT ANALYSIS
 # --------------------------------------------------
 #### ONLINE: get enrichr results from gene query search online
 x = list.files()[grep(".txt", list.files())]
@@ -148,7 +148,7 @@ for (i in 1:length(enrichr)) {
     enrichr[[i]] = Filter(function(x) !is.null(x), enrichr[[i]]) }
 
 # ------------------------------------------------------
-#       ENRICHR RESULTS FILTERING
+#  ENRICHMENT FILTERING
 # ------------------------------------------------------
 # filter enrichr results to extract top enriched terms (pathways, processes, etc.),
 # arrange by %  genes/term; overlapping gene set size; combined score,
@@ -180,7 +180,7 @@ names(top) = names
 for (i in 1:length(top))  { top[[i]]$Overlap = paste(" ", top[[i]]$Overlap)   }
 
 # ------------------------------------------------------
-#     SAVE RESULTS
+#  SAVE RESULTS
 # ..............
 setwd("../../functionalAnalysis/")
 # ------------------------------------------------------
@@ -190,7 +190,7 @@ lapply(seq_along(top), function(i) {
            write.csv(top[[i]], file = paste0(names(top)[i], "/", names(top)[i], "_enrichR_withSpatiallySimilarGenes.csv"), row.names = F )})
 
 # --------------------------------------------------
-#     SAVE SESSION
+#  SAVE SESSION
 # --------------------------------------------------
 # save workspace + session info
 save( list = ls(), file = paste0("SessionInfo/functionalInsights", "_", substring(Sys.Date(), 3), ".Rdata"))
