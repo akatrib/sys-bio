@@ -1,13 +1,12 @@
-# ————————————————————————————————————————————————————————————————————————————————
+# ————————————————————————————————————————————————————————————————————————————————————————————————
 # Code:       geneSet-enrichment.R
 # Author:     Amal Katrib
-# Use:         Conduct gene-set enrichment analysis using Enrichr's curated
-#                  list of public libraries to draw biological insights
-# Prereqs:    [ "gene.txt" ]:  genes of interest, saved in the appropriate folder
-#                   [ similar genes ]:  spatially-correlated genes, saved in the appropriate folder
-#                   [ online analysis ]:  Enrichr.com, to analyze & download enrichment results
+# Use:         Conduct gene-set enrichment analysis using Enrichr's curated list of public libraries to draw biological insights
+# Prereqs:   [ "gene.txt" ]:  genes of interest, saved in the appropriate folder
+#                  [ similar genes ]:  spatially-correlated genes, saved in the appropriate folder
+#                  [ online analysis ]:  Enrichr.com, to analyze & download enrichment results
 #
-# ————————————————————————————————————————————————————————————————————————————————
+# ————————————————————————————————————————————————————————————————————————————————————————————————
 rm( list = ls (all = TRUE))
 options(stringsAsFactors = F)
 
@@ -56,7 +55,8 @@ names(genes.similar) = names
 
 # save non-empty entries
 lapply(seq_along(genes.in.similar), function(i) {
-           write.table(genes.in.similar[[i]], file = paste0(names(genes.in.similar)[i], "_spatiallySimilarGenes.txt"), row.names = F, col.names = F, quote = F) })
+          write.table(genes.in.similar[[i]], file = paste0(names(genes.in.similar)[i],
+          "_spatiallySimilarGenes.txt"), row.names = F, col.names = F, quote = F) })
 
 # save altogether
 write.table(c(names(genes.in.similar), unlist(genes.in.similar, use.names = F)) %>% unique,
