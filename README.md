@@ -1,7 +1,8 @@
-Systems Biology Analytics
+## Systems Biology Analytics
+@AmalKatrib
 
-#### geneSet-enrichment.R:
-Enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
+[geneSet-enrichment.R](geneSet-enrichment.R):
+> Enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
 - Pathways, molecular functions & biological processes
 - Co-expressed/-localized molecular factors & interactors
 - Organs, tissues & cell types / compartments
