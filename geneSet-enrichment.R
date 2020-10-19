@@ -1,14 +1,11 @@
 # ————————————————————————————————————————————————————————————————————————————————
-#   geneSet-enrichment.R
-#   @AmalKatrib
-#
-#   Objective: Leverage Enrichr's curated list of gene-set libraries to conduct enrichment analysis
-#                    using an input of genes that were deemed as "interesting" from prior analysis
-#   Prerequisites:
-#   --  [ REQ'D INPUT ]  Identify genes of interest & save in the appropriate folder
-#   --  [ OPTIONAL INPUT ]  Extract spatially-correlated genes & save in the appropriate folder
-#   --  [ ONLINE ANALYSIS ]  Use Enrichr.com to analyze & download enrichment results
-#   --  [ OFFLINE ANALYSIS ]  Specify biological databases relevent to research question
+#    Code:         geneSet-enrichment.R
+#    Author:       Amal Katrib
+#    Use:           Conduct gene-set enrichment analysis using Enrichr's curated
+#                       list of public libraries to draw biological insights
+#     Prereqs:    [ "gene.txt" ]:  genes of interest, saved in the appropriate folder
+#                       [ similar genes ]:  spatially-correlated genes, saved in the appropriate folder
+#                       [ online analysis ]:  www.Enrichr.com, to analyze & download enrichment results#
 #
 # ————————————————————————————————————————————————————————————————————————————————
 rm( list = ls (all = TRUE))
@@ -19,44 +16,37 @@ library(dplyr)
 library(stringr)
 library(enrichR)
 
-# --------------------------------------------------
+# ------------------------------------------------------
 #       MANUAL INPUT
-# --------------------------------------------------
-
-# specify which dataset to analyze
-# select from: "a", "b", "c"
-type = "a"
+# ------------------------------------------------------
+type = "a" # specify which dataset to analyze, selecting from: "a", "b", "c"
 
 # set corresponding directory for data input and analysis output
 dirIn = ifelse(type == "a", "dirA1/", ifelse(type == "b", "dirB1/", ifelse(type == "c", "dirC1/", NA)))
 dirAnalysis = ifelse(type == "a", "dirA2/", ifelse(type == "b", "dirB2/", ifelse(type == "c", "dirC2/", NA)))
 
-# specify analysis type; select from:
-# "allGene": to input protein biomarker + ALL spatially-correlated proteins from Human Protein Atlas & Allen Human Brain Atlas
-# "intersectingGene": to input protein biomarker + ONLY OVERLAPPING spatially-correlated proteins from Human Protein Atlas & Allen Human Brain Atlas
-analysisType = "allGene" # "allGene", "intersectingGene"
+# specify analysis type, selecting from:
+# "allGene": genes of interest + ALL spatially-correlated genes/proteins from separate analysis
+# "intersectingGene": genes of interest + ONLY OVERLAPPING spatially-correlated genes proteins from separate analysis
+analysisType = "allGene"
 
-# set enrichr filtering parameters, where (1) is for analysis with spatially-similar genes and (2) for analysis without
-p1 = 0.05 # Fisher exact p-val
-p2 = 1
-c1 = 10 # Combined Score = log(p-value) * z.score
-c2 = 10
-d = 0.25 # limit # of findings from one single database by removing those in the bottom x% for combined score
+# set enrichr filtering parameters
+p1 = 0.05   # fisher exact p-val
+c1 = 10      # combined Score = log(p-value) * z.score
+d = 0.25     # limit # of findings from one single database by removing those in the bottom x% for combined score
 
-# --------------------------------------------------
+# ------------------------------------------------------
 #       DATA INPUT
 # ..............
 setwd(dirAnalysis)
-# --------------------------------------------------
-
+# ------------------------------------------------------
 # load gene list & adjust data input format to remove duplicates & sort
-genes = read.table("genes.txt"()
+genes = read.table("genes.txt"())
 genes = genes[,1] %>% unique() %>% sort
 
-# --------------------------------------------------
+# ------------------------------------------------------
 #       PRELIMINARY DATA ANALYSIS
-# --------------------------------------------------
-
+# ------------------------------------------------------
 # load genes with similar spatial expression (from prior analysis))
 genes.similar = list.files(path = dirAnalysis, full.names = T)
 genes.similar = genes.similar[grep(analysisType, genes.similar)]
@@ -66,27 +56,23 @@ names(genes.similar) = names
 
 # save non-empty entries
 lapply(seq_along(genes.in.similar), function(i) {
-       write.table(genes.in.similar[[i]],
-                   file = paste0(names(genes.in.similar)[i], "_spatiallySimilarGenes.txt"), row.names = F, col.names = F, quote = F) })
+           write.table(genes.in.similar[[i]], file = paste0(names(genes.in.similar)[i], "_spatiallySimilarGenes.txt"), row.names = F, col.names = F, quote = F) })
 
 # save altogether
 write.table(c(names(genes.in.similar), unlist(genes.in.similar, use.names = F)) %>% unique,
-            file = "listAllSpatiallySimilarGenes.txt", row.names = F, col.names = F, quote = F)
+                 file = "listAllSpatiallySimilarGenes.txt", row.names = F, col.names = F, quote = F)
 
-# now make sure we include the gene/protein biomarker itself to the list
+# don't forget to include the primary genes of interest
 genes.similar = lapply(seq_along(genes.similar), function(i) c(names(genes.similar)[i], genes.similar[[i]]))
 names(genes.similar) = names
-
 
 # --------------------------------------------------
 #       ENRICHR GENE-SET ENRICHMENT ANALYSIS
 # --------------------------------------------------
-
 #### ONLINE: get enrichr results from gene query search online
 x = list.files()[grep(".txt", list.files())]
 enrichr = lapply(1:length(x), function(i) read.csv(x[i], header = T, sep = "\t"))
 names(enrichr) = gsub("_table.txt", "", x)
-
 
 #### OFFLINE: using enrichr libraries
 # grab all libraries from EnrichR. Make sure to comment out irrelevant libraries,
@@ -161,11 +147,9 @@ for (i in 1:length(enrichr)) {
     enrichr[[i]] = Filter(function(x) nrow(x) > 0, enrichr[[i]])
     enrichr[[i]] = Filter(function(x) !is.null(x), enrichr[[i]]) }
 
-
-# --------------------------------------------------
+# ------------------------------------------------------
 #       ENRICHR RESULTS FILTERING
-# --------------------------------------------------
-
+# ------------------------------------------------------
 # filter enrichr results to extract top enriched terms (pathways, processes, etc.),
 # arrange by %  genes/term; overlapping gene set size; combined score,
 # and then filter to only keep top 50-75% entries from each db
@@ -195,22 +179,19 @@ names(top) = names
 # add space before "Overlap" column to prevent excel converstion to date format
 for (i in 1:length(top))  { top[[i]]$Overlap = paste(" ", top[[i]]$Overlap)   }
 
-
-# --------------------------------------------------
+# ------------------------------------------------------
 #     SAVE RESULTS
 # ..............
-setwd("../../FunctionalNetworkAnalysis/")
-# --------------------------------------------------
-
+setwd("../../functionalAnalysis/")
+# ------------------------------------------------------
 # create or use existing gene list folders to save enrichment results
 lapply(seq_along(top), function(i) {
-      dir.create(file.path(names(top)[i]), showWarnings = F)
-      write.csv(top[[i]], file = paste0(names(top)[i], "/", names(top)[i], "_enrichR_withSpatiallySimilarGenes.csv"), row.names = F )})
+           dir.create(file.path(names(top)[i]), showWarnings = F)
+           write.csv(top[[i]], file = paste0(names(top)[i], "/", names(top)[i], "_enrichR_withSpatiallySimilarGenes.csv"), row.names = F )})
 
 # --------------------------------------------------
 #     SAVE SESSION
 # --------------------------------------------------
-
 # save workspace + session info
-save( list = ls(), file = paste0("SessionInfo/FunctionalInsights", "_", substring(Sys.Date(), 3), ".Rdata"))
-writeLines(capture.output(sessionInfo()), "SessionInfo/FunctionalInsights_SessionInfo.txt")
+save( list = ls(), file = paste0("SessionInfo/functionalInsights", "_", substring(Sys.Date(), 3), ".Rdata"))
+writeLines(capture.output(sessionInfo()), "SessionInfo/functionalInsights_SessionInfo.txt")
