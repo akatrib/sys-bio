@@ -14,5 +14,6 @@
 
 ---
 
-### SpatialExpressionCorrelation.R
-> To extract "spatially-correlated" genes and isoforms that exhibit  a significant overlap in organ-, tissue-, and cell type-specific expression profile
+### [HPA-spatial-expression.R](HPA-spatial-expression.R)
+> To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile,
+> using data downloaded from __Human Protein Atlas (HPA)__ & then further adjusted to facilitate a streamlined analysis
