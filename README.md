@@ -19,4 +19,4 @@ Pathways, molecular functions & biological processes  &nbsp; __|__ &nbsp;  Co-ex
 > To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile,
 > using data downloaded from __Human Protein Atlas (HPA)__ & then further adjusted to facilitate a streamlined analysis
 > 
-<code class="code1"> CENTRAL NERVOUS SYSTEM (CNS) BARRIER </code>
+<code class="code2"> CENTRAL NERVOUS SYSTEM (CNS) BARRIER </code>
