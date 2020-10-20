@@ -1,5 +1,5 @@
 ## Systems Biology Analytics
-`@AmalKatrib`  &nbsp; Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings
+`&nbsp; AmalKatrib &nbsp;`  &nbsp; Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings
 
 ### [geneSet-enrichment.R](geneSet-enrichment.R)
 > To perform functional enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
