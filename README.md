@@ -1,10 +1,10 @@
 ## Systems Biology Analytics
-`Amal Katrib` &nbsp; Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings
+`by Amal Katrib` &nbsp; Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings
 
 ### [geneSet-enrichment.R](geneSet-enrichment.R)
 > To perform functional enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
 
-Pathways, molecular functions & biological processes  &nbsp; __|__ &nbsp;  Co-expressed/-localized molecular factors & interactors  &nbsp; __|__ &nbsp;  Organs, tissues & cell types / compartments  &nbsp; __|__ &nbsp;  Phenotypes & clinical traits  &nbsp; __|__ &nbsp;  Diseases, pathologies & symptoms  &nbsp __|__ &nbsp;  Drugs & Therapeutic Targets
+* #### Pathways, molecular functions & biological processes  &nbsp; __|__ &nbsp;  Co-expressed/-localized molecular factors & interactors  &nbsp; __|__ &nbsp;  Organs, tissues & cell types / compartments  &nbsp; __|__ &nbsp;  Phenotypes & clinical traits  &nbsp; __|__ &nbsp;  Diseases, pathologies & symptoms  &nbsp __|__ &nbsp;  Drugs & Therapeutic Targets
 
 
 ###### __Note:__ Many researchers use a wide range of "combined score" cutoffs to assess the significance of gene set/functional enrichment findings from Enrichr. The ad hoc selection of a significance threshold seems to be, for the most part, arbitrary and purely subjective (i.e., not backed up by clear-cut logic and scientific reasoning and, in some cases, even biased, driven by the temptation to produce favorable outcomes).
@@ -18,5 +18,5 @@ Pathways, molecular functions & biological processes  &nbsp; __|__ &nbsp;  Co-ex
 ### [HPA-spatial-expression.R](HPA-spatial-expression.R)
 > To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile,
 > using data downloaded from __Human Protein Atlas (HPA)__ & then further adjusted to facilitate a streamlined analysis
-> 
+>
 <code class="code2"> CENTRAL NERVOUS SYSTEM (CNS) BARRIER </code>
