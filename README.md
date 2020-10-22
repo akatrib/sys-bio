@@ -1,10 +1,11 @@
 ## Systems Biology Analytics
-`by Amal Katrib` &nbsp; Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings
+Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings  &nbsp; `by Amal Katrib`
 
 ### [geneSet-enrichment.R](geneSet-enrichment.R)
 > To perform functional enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
 
 * #### Pathways, molecular functions & biological processes
+
 * #### Co-expressed/-localized molecular factors & interactors
 * #### Organs, tissues & cell types / compartments
 * #### Phenotypes & clinical traits
