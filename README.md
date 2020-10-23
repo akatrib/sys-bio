@@ -4,7 +4,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 &nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "28%" height = "18%"/>
+  <img src="img/enrich.logo.png" width = "26%" height = "15%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
@@ -36,7 +36,7 @@ __[ OFFLINE ]__ by downloading the __R__ package from CRAN  using `install.packa
 
 ## [HPA-spatial-expression.R](HPA-spatial-expression.R)
 <p align="left">
-  <img src="img/hpa.logo.png" width = "42%"/>
+  <img src="img/hpa.logo.png" width = "44%"/>
 </p>
 
 To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from `Human Protein Atlas (HPA)` and then further adjusted to facilitate a streamlined analysis
