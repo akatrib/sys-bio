@@ -4,7 +4,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 &nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "15%"/>
+  <img src="img/enrich.logo.png" width = "20%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
@@ -14,10 +14,12 @@ To perform functional enrichment analysis, leveraging the `Enrichr` list of cura
 * Diseases, pathologies, & symptoms
 * Drugs & therapeutic targets
 
-The analysis can be performed either __ONLINE__ using the [web interface](http://amp.pharm.mssm.edu/Enrichr) or __OFFLINE__ by downloading the __R__ package from CRAN  using `install.packages("enrichR")`
-
+The analysis can be performed either:
+__ONLINE__ using the [web interface](http://amp.pharm.mssm.edu/Enrichr)
+__OFFLINE__ by downloading the __R__ package from CRAN  using `install.packages("enrichR")`
+&nbsp;
 <p align="center">
-  <img src="img/enrich1.png" width = "40%"/>
+  <img src="img/enrich1.png" width = "45%"/>
 </p>
 
 > Many researchers use a wide range of __"Combined Score"__ cutoffs to assess the significance of gene set/functional enrichment findings from Enrichr. The ad hoc selection of a significance threshold seems to be, for the most part, arbitrary and purely subjective (i.e., not backed up by clear-cut logic and scientific reasoning and, in some cases, even biased, driven by the temptation to produce favorable outcomes).
