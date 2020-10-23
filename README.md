@@ -1,6 +1,5 @@
 ## Systems Biology Analytics
-Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings  &nbsp; `by Amal Katrib`
-&nbsp;
+Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings  &nbsp; `by Amal Katrib` <br>
 
 ### [geneSet-enrichment.R](geneSet-enrichment.R)
 > To perform functional enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
@@ -12,9 +11,8 @@ Analysis workflow for computational tools often used in systems biology and bioi
 * Drugs & therapeutic targets
 
 <p align="center">
-  <img src="img/enrich1.png" width = "50%"/>
+  <img src="img/enrich1.png" width = "30%"/>
 </p>
-
   Many researchers use a wide range of _"combined score"_ cutoffs to assess the significance of gene set/functional enrichment findings from Enrichr. The ad hoc selection of a significance threshold seems to be, for the most part, arbitrary and purely subjective (i.e., not backed up by clear-cut logic and scientific reasoning and, in some cases, even biased, driven by the temptation to produce favorable outcomes).
 
   A common practice that is arguably quite reasonable, albeit not entirely devoid of shortcomings, is to: (a) apply an adjusted p-value ("q-value") cutoff of 0.01-0.1 to filter enriched terms; (b) use the "combined score" output (which has been extensively shown to outperform other ranking metrics due to its inherent z-score permutation background correction on Fisher's exact test p-value1) to sort those filtered terms, in descending order, and then (c) select top X highest ranked terms to identify significantly over-represented functional categories.
