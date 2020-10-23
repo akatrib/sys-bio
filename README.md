@@ -1,8 +1,8 @@
-# Systems Biology Analytics
+## Systems Biology Analytics
 Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings  &nbsp; `by Amal Katrib`
 <br>
 
-## [GeneSet-enrichment.R](geneSet-enrichment.R)
+## [geneSet-enrichment.R](geneSet-enrichment.R)
 To perform functional enrichment analysis, leveraging the `Enrichr` comprehensive list of curated gene set libraries to extract significantly represented:
 
 * Pathways, molecular functions, & biological processes
@@ -11,7 +11,6 @@ To perform functional enrichment analysis, leveraging the `Enrichr` comprehensiv
 * Diseases, pathologies, & symptoms
 * Drugs & therapeutic targets
 
-<br>
 <p align="center">
   <img src="img/enrich1.png" width = "40%"/>
 </p>
