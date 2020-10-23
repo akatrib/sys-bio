@@ -35,4 +35,8 @@ __[ OFFLINE ]__ by downloading the __R__ package from CRAN  using `install.packa
 
 
 ## [HPA-spatial-expression.R](HPA-spatial-expression.R)
+<p align="left">
+  <img src="img/hpa.logo.png" width = "30%"/>
+</p>
+
 To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from `Human Protein Atlas (HPA)` and then further adjusted to facilitate a streamlined analysis
