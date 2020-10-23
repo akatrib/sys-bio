@@ -3,7 +3,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 <br>
 
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
-To perform functional enrichment analysis, leveraging Enrichr's comprehensive list of curated gene set libraries to extract significantly represented:
+To perform functional enrichment analysis, leveraging the `Enrichr` comprehensive list of curated gene set libraries to extract significantly represented:
 
 * Pathways, molecular functions, & biological processes
 * Co-expressed/-localized molecular factors & interactors
@@ -26,4 +26,4 @@ To perform functional enrichment analysis, leveraging Enrichr's comprehensive li
 <br>
 
 ## [HPA-spatial-expression.R](HPA-spatial-expression.R)
-To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from __Human Protein Atlas (HPA)__ & then further adjusted to facilitate a streamlined analysis
+To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from `Human Protein Atlas (HPA)` and then further adjusted to facilitate a streamlined analysis
