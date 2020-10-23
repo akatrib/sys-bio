@@ -4,7 +4,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 &nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "26%" height = "15%"/>
+  <img src="img/enrich.logo.png" width = "26%" height = "10%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
@@ -42,8 +42,10 @@ __[ OFFLINE ]__ by downloading the __R__ package from CRAN  using `install.packa
 To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from `Human Protein Atlas (HPA)` and then further adjusted to facilitate a streamlined analysis
 
 
-The original HPA data files directly downloaded from the [HPA website](https://www.proteinatlas.org/about/download)<br>
-To assemble the __[ hpa.tissue.csv ] __ dataset, use the following:
+The original data files can be directly downloaded from the [HPA webpage](https://www.proteinatlas.org/about/download)<br>
+&nbsp;
+<br>
+ __[ hpa.tissue.csv ]__ user-adjsuted dataset is formed by running:
 ```r
 # read in the "normal tissue data" & "RNA consensus tissue gene data" files from HPA
 tissue1 = read.csv("normal_tissue.tsv", sep="\t")
@@ -53,4 +55,23 @@ tissue2 = read.csv("rna_tissue_consensus.tsv", sep="\t")
 hpa.tissue = tissue2 %>% left_join(tissue1)
 
 # adjust the formatting as needed
+
+```
+
+&nbsp;
+<br>
+ __[ hpa.blood.csv ]__ user-adjsuted dataset is formed by running:
+```r
+# read in the "RNA HPA blood cell gene data", "RNA Monaco blood cell gene data", & "RNA Schmiedel blood cell gene data" files from HPA
+blood1 = read.csv("rna_blood_cell.tsv", sep="\t")
+blood2 = read.csv("rna_blood_cell_monaco.tsv", sep="\t")
+blood3 = read.csv("rna_blood_cell_schmiedel.tsv", sep="\t")
+
+# merge dataframes per largest size
+hpa.blood = blood2 %>%
+                    left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>%
+                    left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
+
+# adjust the formatting as needed
+
 ```
