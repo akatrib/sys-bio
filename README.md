@@ -4,7 +4,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 &nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "28%" height = "22%"/>
+  <img src="img/enrich.logo.png" width = "28%" height = "18%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
