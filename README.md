@@ -14,10 +14,11 @@ To perform functional enrichment analysis, leveraging the `Enrichr` list of cura
 * Diseases, pathologies, & symptoms
 * Drugs & therapeutic targets
 
-The analysis can be performed either:
-__ONLINE__ using the [web interface](http://amp.pharm.mssm.edu/Enrichr)
-__OFFLINE__ by downloading the __R__ package from CRAN  using `install.packages("enrichR")`
-&nbsp;
+The analysis can be performed either:<br>
+__ONLINE__ using the [web interface](http://amp.pharm.mssm.edu/Enrichr)<br>
+__OFFLINE__ by downloading the __R__ package from CRAN  using `install.packages("enrichR")` <br>
+
+
 <p align="center">
   <img src="img/enrich1.png" width = "45%"/>
 </p>
