@@ -15,8 +15,8 @@ To perform functional enrichment analysis, leveraging the `Enrichr` list of cura
 * Drugs & therapeutic targets
 
 The analysis can be performed either:<br>
-__[ ONLINE ]__   using the [web interface](http://amp.pharm.mssm.edu/Enrichr)<br>
-__[ OFFLINE ]__   by downloading the __R__ package from CRAN  using `install.packages("enrichR")` <br>
+__[ ONLINE ]__ &nbsp;&nbsp; using the [web interface](http://amp.pharm.mssm.edu/Enrichr)<br>
+__[ OFFLINE ]__ &nbsp;&nbsp; by downloading the __R__ package from CRAN  using `install.packages("enrichR")` <br>
 &nbsp;
 
 <p align="left">
@@ -45,7 +45,7 @@ To extract "spatially-correlated" genes isoforms & proteins, exhibiting a signif
 The original data files can be directly downloaded from the [HPA webpage](https://www.proteinatlas.org/about/download)<br>
 &nbsp;
 <br>
- __[ HPA.TISSUE.CSV ]__    user-adjsuted dataset is formed by running:
+ __[ hpa.tissue.csv ]__ &nbsp;&nbsp; user-adjsuted dataset is formed by running:
 ```r
 # read in the "normal tissue data" & "RNA consensus tissue gene data" files from HPA
 tissue1 = read.csv("normal_tissue.tsv", sep="\t")
@@ -60,7 +60,7 @@ hpa.tissue = tissue2 %>% left_join(tissue1)
 
 &nbsp;
 <br>
- __[ HPA.BLOOD.CSV ]__   user-adjsuted dataset is formed by running:
+ __[ hpa.blood.csv ]__ &nbsp;&nbsp; user-adjsuted dataset is formed by running:
 ```r
 # read in the "RNA HPA blood cell gene data", "RNA Monaco blood cell gene data", & "RNA Schmiedel blood cell gene data" files from HPA
 blood1 = read.csv("rna_blood_cell.tsv", sep="\t")
