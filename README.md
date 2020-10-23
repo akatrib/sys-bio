@@ -4,7 +4,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 &nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "26%" height = "10%"/>
+  <img src="img/enrich.logo.png" width = "26%" height = "5%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
@@ -15,8 +15,8 @@ To perform functional enrichment analysis, leveraging the `Enrichr` list of cura
 * Drugs & therapeutic targets
 
 The analysis can be performed either:<br>
-__[ ONLINE ]__ using the [web interface](http://amp.pharm.mssm.edu/Enrichr)<br>
-__[ OFFLINE ]__ by downloading the __R__ package from CRAN  using `install.packages("enrichR")` <br>
+__[ ONLINE ]__   using the [web interface](http://amp.pharm.mssm.edu/Enrichr)<br>
+__[ OFFLINE ]__   by downloading the __R__ package from CRAN  using `install.packages("enrichR")` <br>
 &nbsp;
 
 <p align="left">
@@ -45,7 +45,7 @@ To extract "spatially-correlated" genes isoforms & proteins, exhibiting a signif
 The original data files can be directly downloaded from the [HPA webpage](https://www.proteinatlas.org/about/download)<br>
 &nbsp;
 <br>
- __[ hpa.tissue.csv ]__ user-adjsuted dataset is formed by running:
+ __[ HPA.TISSUE.CSV ]__    user-adjsuted dataset is formed by running:
 ```r
 # read in the "normal tissue data" & "RNA consensus tissue gene data" files from HPA
 tissue1 = read.csv("normal_tissue.tsv", sep="\t")
@@ -60,7 +60,7 @@ hpa.tissue = tissue2 %>% left_join(tissue1)
 
 &nbsp;
 <br>
- __[ hpa.blood.csv ]__ user-adjsuted dataset is formed by running:
+ __[ HPA.BLOOD.CSV ]__   user-adjsuted dataset is formed by running:
 ```r
 # read in the "RNA HPA blood cell gene data", "RNA Monaco blood cell gene data", & "RNA Schmiedel blood cell gene data" files from HPA
 blood1 = read.csv("rna_blood_cell.tsv", sep="\t")
@@ -68,9 +68,8 @@ blood2 = read.csv("rna_blood_cell_monaco.tsv", sep="\t")
 blood3 = read.csv("rna_blood_cell_schmiedel.tsv", sep="\t")
 
 # merge dataframes per largest size
-hpa.blood = blood2 %>%
-                    left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>%
-                    left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
+hpa.blood = blood2 %>% left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>%
+                                         left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
 
 # adjust the formatting as needed
 
