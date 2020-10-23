@@ -11,7 +11,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 * Diseases, pathologies, & symptoms
 * Drugs & therapeutic targets
 
-![enrich1](img/enrich1.png){:height="50%" width="50%"}
+![enrich2](img/enrich2.png)
 
   Many researchers use a wide range of _"combined score"_ cutoffs to assess the significance of gene set/functional enrichment findings from Enrichr. The ad hoc selection of a significance threshold seems to be, for the most part, arbitrary and purely subjective (i.e., not backed up by clear-cut logic and scientific reasoning and, in some cases, even biased, driven by the temptation to produce favorable outcomes).
 
