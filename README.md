@@ -3,13 +3,17 @@ Analysis workflow for computational tools often used in systems biology and bioi
 <br>
 
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
-To perform functional enrichment analysis, leveraging the `Enrichr` comprehensive list of curated gene set libraries to extract significantly represented:
-
+<p align="left">
+  <img src="img/enrichr.logo.png" width = "40%"/>
+</p>
+To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
 * Pathways, molecular functions, & biological processes
 * Co-expressed/-localized molecular factors & interactors
 * Phenotypes & clinical traits
 * Diseases, pathologies, & symptoms
 * Drugs & therapeutic targets
+
+The analysis can be performed either ONLINE using the following __[web interface](http://amp.pharm.mssm.edu/Enrichr)__ or OFFLINE by downloading the R package from CRAN  using `install.packages("enrichR")`
 
 <p align="center">
   <img src="img/enrich1.png" width = "40%"/>
