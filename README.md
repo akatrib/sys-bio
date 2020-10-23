@@ -23,11 +23,6 @@ To perform functional enrichment analysis, leveraging Enrichr's comprehensive li
 > While less frequently employed, the aforementioned workflow can be further modified to better address the question at hand and refine the contextual interpretability of enrichment findings. This can be as simple as imposing an additional __"Combined Score"__ threshold (such as >15 or >30, with higher values being more stringent) to narrow down the list of significant results. The selection of enriched terms can also be further optimized as to preserve and prioritize those that are key to the underlying question (for example, by excluding irrelevant gene sets, assigning knowledge-based weights to favor some gene sets over others, concatenating closely-linked gene sets, mapping genes/gene sets onto functional interaction networks to identify topologically-matching processes, etc.)
 
 
-
-
----
-
-
 <br>
 
 ## [HPA-spatial-expression.R](HPA-spatial-expression.R)
