@@ -1,10 +1,10 @@
 ## Systems Biology Analytics
 Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings  &nbsp; `by Amal Katrib`
 <br>
-
+&nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "30%"/>
+  <img src="img/enrich.logo.png" width = "15%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
@@ -14,7 +14,7 @@ To perform functional enrichment analysis, leveraging the `Enrichr` list of cura
 * Diseases, pathologies, & symptoms
 * Drugs & therapeutic targets
 
-The analysis can be performed either ONLINE using the following __[web interface](http://amp.pharm.mssm.edu/Enrichr)__ or OFFLINE by downloading the R package from CRAN  using `install.packages("enrichR")`
+The analysis can be performed either __ONLINE__ using the [web interface](http://amp.pharm.mssm.edu/Enrichr) or __OFFLINE__ by downloading the __R__ package from CRAN  using `install.packages("enrichR")`
 
 <p align="center">
   <img src="img/enrich1.png" width = "40%"/>
