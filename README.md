@@ -1,8 +1,3 @@
-
-```scss
-@import "@primer/css/index.scss";
-```
-
 ## Systems Biology Analytics
 Analysis workflow for computational tools often used in systems biology and bioinformatics to extract insights from data-driven findings  &nbsp; `by Amal Katrib`
 &nbsp;
@@ -17,6 +12,10 @@ Analysis workflow for computational tools often used in systems biology and bioi
 * Drugs & therapeutic targets
 
 ##### _How to best filter enrichment results?_
+
+
+**Note:** a note is something that needs to be mentioned but is apart from the context.
+{: .note}
 
 ###### Note: Many researchers use a wide range of "combined score" cutoffs to assess the significance of gene set/functional enrichment findings from Enrichr. The ad hoc selection of a significance threshold seems to be, for the most part, arbitrary and purely subjective (i.e., not backed up by clear-cut logic and scientific reasoning and, in some cases, even biased, driven by the temptation to produce favorable outcomes).
 
