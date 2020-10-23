@@ -40,3 +40,17 @@ __[ OFFLINE ]__ by downloading the __R__ package from CRAN  using `install.packa
 </p>
 
 To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from `Human Protein Atlas (HPA)` and then further adjusted to facilitate a streamlined analysis
+
+
+The original HPA data files directly downloaded from the [HPA website](https://www.proteinatlas.org/about/download)<br>
+To assemble the __[ hpa.tissue.csv ] __ dataset, use the following:
+```r
+# read in the "normal tissue data" & "RNA consensus tissue gene data" files from HPA
+tissue1 = read.csv("normal_tissue.tsv", sep="\t")
+tissue2 = read.csv("rna_tissue_consensus.tsv", sep="\t")
+
+# merge dataframes per largest size
+hpa.tissue = tissue2 %>% left_join(tissue1)
+
+# adjust the formatting as needed
+```
