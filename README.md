@@ -78,5 +78,5 @@ left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
 
 ```
 
-## [WGCNA-networkAnalysis.R](WGCNA-networkAnalysis.R)
+## [WGCNA-network-analysis.R](WGCNA-network-analysis.R)
 To generate a gene co-expression network
