@@ -1,12 +1,17 @@
-# ————————————————————————————————————————————————————————————————————————————————————————————————
-# Code:       geneSet-enrichment.R
-# Author:     Amal Katrib
-# Use:         Conduct gene-set enrichment analysis using Enrichr's curated list of public libraries to draw biological insights
-# Prereqs:   [ "gene.txt" ]:  genes of interest, saved in the appropriate folder
-#                  [ similar genes ]:  spatially-correlated genes, saved in the appropriate folder
-#                  [ online analysis ]:  Enrichr.com, to analyze & download enrichment results
+# ——————————————————————————————————————————————————————
+# geneSet-enrichment.R
+# AUTHOR: Amal Katrib
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+# OBJECTIVE:
+# Conduct gene-set enrichment analysis using Enrichr's
+# curated list of public libraries to draw biological insights
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+# PREREQS:
+# [ gene.txt ]  genes of interest, saved in the appropriate folder
+# [ similar genes ]  spatially-correlated genes, saved in the appropriate folder
+# [ online analysis :  Enrichr.com, to analyze & download enrichment results
 #
-# ————————————————————————————————————————————————————————————————————————————————————————————————
+# ——————————————————————————————————————————————————————
 rm( list = ls (all = TRUE))
 options(stringsAsFactors = F)
 
@@ -26,13 +31,13 @@ dirAnalysis = ifelse(type == "a", "dirA2/", ifelse(type == "b", "dirB2/", ifelse
 
 # specify analysis type, selecting from:
 # "allGene": genes of interest + ALL spatially-correlated genes/proteins from separate analysis
-# "intersectingGene": genes of interest + ONLY OVERLAPPING spatially-correlated genes proteins from separate analysis
+# "intersectingGene": genes of interest + spatially-correlated genes proteins from separate analysis
 analysisType = "allGene"
 
 # set enrichr filtering parameters
 p1 = 0.05   # fisher exact p-val
 c1 = 10      # combined Score = log(p-value) * z.score
-d = 0.25     # limit # of findings from one single database by removing those in the bottom x% for combined score
+d = 0.25     # limit # of findings from a single database by discarding a % with lowest combined score
 
 # ------------------------------------------------------
 #  DATA INPUT
@@ -55,15 +60,17 @@ names(genes.similar) = names
 
 # save non-empty entries
 lapply(seq_along(genes.in.similar), function(i) {
-          write.table(genes.in.similar[[i]], file = paste0(names(genes.in.similar)[i],
-          "_spatiallySimilarGenes.txt"), row.names = F, col.names = F, quote = F) })
+  write.table(genes.in.similar[[i]], file = paste0(names(genes.in.similar)[i],
+  "_spatiallySimilarGenes.txt"), row.names = F, col.names = F, quote = F) })
 
 # save altogether
-write.table(c(names(genes.in.similar), unlist(genes.in.similar, use.names = F)) %>% unique,
-                 file = "listAllSpatiallySimilarGenes.txt", row.names = F, col.names = F, quote = F)
+write.table(c(names(genes.in.similar),
+unlist(genes.in.similar, use.names = F)) %>% unique,
+file = "listAllSpatiallySimilarGenes.txt", row.names = F, col.names = F, quote = F)
 
 # don't forget to include the primary genes of interest
-genes.similar = lapply(seq_along(genes.similar), function(i) c(names(genes.similar)[i], genes.similar[[i]]))
+genes.similar = lapply(seq_along(genes.similar),
+function(i) c(names(genes.similar)[i], genes.similar[[i]]))
 names(genes.similar) = names
 
 # --------------------------------------------------
@@ -157,27 +164,30 @@ top = list()
 
 #### Enrichment filtering for all spatially-similar genes
 for (i in 1:length(enrichr)) {
-      top[[i]] = lapply(enrichr[[i]], function(x) x %>% filter(Combined.Score >= c1, P.value <= p1))
-      top[[i]] = lapply(top[[i]], function(x) x %>%
-                                    select(Term, Genes, P.value, Adjusted.P.value, Combined.Score, Overlap)) %>%
-                                    do.call(rbind.data.frame, .)
+  top[[i]] = lapply(enrichr[[i]], function(x) x %>% filter(Combined.Score >= c1, P.value <= p1))
+  top[[i]] = lapply(top[[i]], function(x) x %>%
+  select(Term, Genes, P.value, Adjusted.P.value, Combined.Score, Overlap)) %>%
+  do.call(rbind.data.frame, .)
 
-      top[[i]] = top[[i]] %>% mutate(db = gsub("\\.*", "", rownames(top[[i]])))
-      top[[i]]$db = gsub('[[:digit:]]+', '', top[[i]]$db)
-      top[[i]]$db = gsub("\\_$", "", top[[i]]$db)
-      rownames(top[[i]]) = 1:nrow(top[[i]])
-      top[[i]] = top[[i]] %>%
-                 arrange(desc(as.integer(str_count(top[[i]]$Genes, ";")/as.integer(gsub(".*/", "", top[[i]]$Overlap)))),
-                 desc(str_count(top[[i]]$Genes, ";"))) %>%
-                 group_by(db) %>%
-                 #filter(Combined.Score > quantile(Combined.Score, d)) %>%
-                 arrange(db) %>%
-                 as.data.frame() }
+  top[[i]] = top[[i]] %>% mutate(db = gsub("\\.*", "", rownames(top[[i]])))
+  top[[i]]$db = gsub('[[:digit:]]+', '', top[[i]]$db)
+  top[[i]]$db = gsub("\\_$", "", top[[i]]$db)
+  rownames(top[[i]]) = 1:nrow(top[[i]])
+  top[[i]] = top[[i]] %>%
+  arrange(desc(as.integer(str_count(top[[i]]$Genes, ";")/as.integer(gsub(".*/", "", top[[i]]$Overlap)))),
+  desc(str_count(top[[i]]$Genes, ";"))) %>%
+  group_by(db) %>%
+  # filter(Combined.Score > quantile(Combined.Score, d)) %>%
+  arrange(db) %>%
+  as.data.frame()
+}
 
 names(top) = names
 
 # add space before "Overlap" column to prevent excel converstion to date format
-for (i in 1:length(top))  { top[[i]]$Overlap = paste(" ", top[[i]]$Overlap)   }
+for (i in 1:length(top))  {
+  top[[i]]$Overlap = paste(" ", top[[i]]$Overlap)
+}
 
 # ------------------------------------------------------
 #  SAVE RESULTS
@@ -186,8 +196,9 @@ setwd("../../functionalAnalysis/")
 # ------------------------------------------------------
 # create or use existing gene list folders to save enrichment results
 lapply(seq_along(top), function(i) {
-           dir.create(file.path(names(top)[i]), showWarnings = F)
-           write.csv(top[[i]], file = paste0(names(top)[i], "/", names(top)[i], "_enrichR_withSpatiallySimilarGenes.csv"), row.names = F )})
+  dir.create(file.path(names(top)[i]), showWarnings = F)
+  write.csv(top[[i]], file = paste0(names(top)[i], "/",
+  names(top)[i], "_enrichR_withSpatiallySimilarGenes.csv"), row.names = F )})
 
 # --------------------------------------------------
 #  SAVE SESSION
