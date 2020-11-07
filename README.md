@@ -70,8 +70,9 @@ blood2 = read.csv("rna_blood_cell_monaco.tsv", sep="\t")
 blood3 = read.csv("rna_blood_cell_schmiedel.tsv", sep="\t")
 
 # merge dataframes per largest size
-hpa.blood = blood2 %>% left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>%
-                                         left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
+hpa.blood = blood2 %>%
+left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>% 
+left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
 
 # adjust the formatting as needed
 
