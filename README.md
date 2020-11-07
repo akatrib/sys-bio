@@ -78,5 +78,7 @@ left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
 
 ```
 
+&nbsp;
+<br>
 ## [WGCNA-network-analysis.R](WGCNA-network-analysis.R)
-To generate a gene co-expression network
+To conceptualize gene interactions by using read count measurements to construct a corresponding `Weighted Gene Co-expression Network (WGCNA)`` and analyzing it to extract network-level trends that are specific to the data
