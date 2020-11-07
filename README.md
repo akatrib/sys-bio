@@ -47,7 +47,8 @@ The original data files can be directly downloaded from the [HPA webpage](https:
 <br>
  __[ hpa.tissue.csv ]__ &nbsp; user-adjsuted dataset is formed by running:
 ```r
-# read in the "normal tissue data" & "RNA consensus tissue gene data" files from HPA
+# load the following HPA datasets:
+# "normal tissue" & "RNA consensus tissue gene"
 tissue1 = read.csv("normal_tissue.tsv", sep="\t")
 tissue2 = read.csv("rna_tissue_consensus.tsv", sep="\t")
 
@@ -62,7 +63,8 @@ hpa.tissue = tissue2 %>% left_join(tissue1)
 <br>
  __[ hpa.blood.csv ]__ &nbsp; user-adjsuted dataset is formed by running:
 ```r
-# read in the "RNA HPA blood cell gene data", "RNA Monaco blood cell gene data", & "RNA Schmiedel blood cell gene data" files from HPA
+# load the following HPA datasets:
+# "RNA HPA blood cell gene", "RNA Monaco blood cell gene", & "RNA Schmiedel blood cell gene"
 blood1 = read.csv("rna_blood_cell.tsv", sep="\t")
 blood2 = read.csv("rna_blood_cell_monaco.tsv", sep="\t")
 blood3 = read.csv("rna_blood_cell_schmiedel.tsv", sep="\t")
