@@ -4,7 +4,7 @@ Analysis workflow for computational tools often used in systems biology and bioi
 &nbsp;
 ## [geneSet-enrichment.R](geneSet-enrichment.R)
 <p align="left">
-  <img src="img/enrich.logo.png" width = "26%" height = "5%"/>
+<img src="img/enrich.logo.png" width = "26%" height = "5%"/>
 </p>
 
 To perform functional enrichment analysis, leveraging the `Enrichr` list of curated gene set libraries to extract significantly represented:
@@ -20,7 +20,7 @@ __[ OFFLINE ]__ &nbsp; by downloading the __R__ package from CRAN  using `instal
 &nbsp;
 
 <p align="left">
-  <img src="img/enrich1.png" width = "40%"/>
+<img src="img/enrich1.png" width = "40%"/>
 </p>
 
 > Many researchers use a wide range of __"Combined Score"__ cutoffs to assess the significance of gene set/functional enrichment findings from Enrichr. The ad hoc selection of a significance threshold seems to be, for the most part, arbitrary and purely subjective (i.e., not backed up by clear-cut logic and scientific reasoning and, in some cases, even biased, driven by the temptation to produce favorable outcomes).
@@ -36,7 +36,7 @@ __[ OFFLINE ]__ &nbsp; by downloading the __R__ package from CRAN  using `instal
 
 ## [HPA-spatial-expression.R](HPA-spatial-expression.R)
 <p align="left">
-  <img src="img/hpa.logo.png" width = "44%"/>
+<img src="img/hpa.logo.png" width = "44%"/>
 </p>
 
 To extract "spatially-correlated" genes isoforms & proteins, exhibiting a significant overlap in organ-, tissue-, and cell type-specific expression profile, using data downloaded from `Human Protein Atlas (HPA)` and then further adjusted to facilitate a streamlined analysis
@@ -45,7 +45,7 @@ To extract "spatially-correlated" genes isoforms & proteins, exhibiting a signif
 The original data files can be directly downloaded from the [HPA webpage](https://www.proteinatlas.org/about/download)<br>
 &nbsp;
 <br>
- __[ hpa.tissue.csv ]__ &nbsp; user-adjsuted dataset is formed by running:
+__[ hpa.tissue.csv ]__ &nbsp; user-adjsuted dataset is formed by running:
 ```r
 # load the following HPA datasets:
 # "normal tissue" & "RNA consensus tissue gene"
@@ -61,7 +61,7 @@ hpa.tissue = tissue2 %>% left_join(tissue1)
 
 &nbsp;
 <br>
- __[ hpa.blood.csv ]__ &nbsp; user-adjsuted dataset is formed by running:
+__[ hpa.blood.csv ]__ &nbsp; user-adjsuted dataset is formed by running:
 ```r
 # load the following HPA datasets:
 # "RNA HPA blood cell gene", "RNA Monaco blood cell gene", & "RNA Schmiedel blood cell gene"
@@ -70,8 +70,9 @@ blood2 = read.csv("rna_blood_cell_monaco.tsv", sep="\t")
 blood3 = read.csv("rna_blood_cell_schmiedel.tsv", sep="\t")
 
 # merge dataframes per largest size
-hpa.blood = blood2 %>% left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>%
-                                         left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
+hpa.blood = blood2 %>%
+left_join(blood1, by = c("Gene","Gene.name", "Blood.cell")) %>%
+left_join(blood3, by = c("Gene","Gene.name", "Blood.cell"))
 
 # adjust the formatting as needed
 
