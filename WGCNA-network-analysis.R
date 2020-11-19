@@ -143,13 +143,14 @@ dev.off()
 # use blockwise for automatic network construction, which calculates topological
 # overlap measure & performs dynamic tree cut to identify modules
 # ------------------------------------------------------
+
 # construct network!
 mergingThresh = 0.25
 net = blockwiseModules(t(counts),networkType="signed hybrid",
 corType="bicor",pearsonFallback = "individual",
 power=beta,maxPOutliers = 0.1,
 maxBlockSize=5000,minModuleSize=30,
-minKMEtoStay=0.7,mergeCutHeight=mergingThresh,
+minkmetoStay=0.7,mergeCutHeight=mergingThresh,
 numericLabels=T,numericlabels=T,reassignThreshold=0,
 pamRespectsDendro=FALSE,deepSplit=2,verbose=5,saveTOMs = F)
 
@@ -162,8 +163,8 @@ MEs=net$MEs
 rownames(MEs) = colnames(counts)
 geneTree = net$dendrograms[[1]]
 # calculate absolute correlation between gene expression & module eigengene >= |0.7|
-# this is referred to as kME - gene membership
-datKME=signedKME(t(counts), MEs)
+# this is referred to as kme - gene membership
+datkme=signedkme(t(counts), MEs)
 
 # ------------------------------------------------------
 #  NETWORK VISUALIZATION
@@ -180,9 +181,69 @@ plotDendroAndColors(net$dendrograms[[blocknumber]],
 
 
 # ------------------------------------------------------
-#  NETWORK ANALYSIS/METRICS
+#  NETWORK ANALYSIS METRICS
 # ..............
 # TABLE WITH MODULE INFO:
 # Module # ; Module Color ; # Genes in Module ;
 # # Hub Genes in module ; % Hub Genes in Module
 # ------------------------------------------------------
+
+# adjust module data to keep it orderly (per module #)
+kme= datkme[,order(as.integer(gsub("kme","",colnames(datkme))))]
+moduleLabels = as.data.frame(moduleLabels)
+rownames(moduleLabels) = rownames(kme)
+moduleLabels$moduleLabels = paste0("M",moduleLabels$moduleLabels)
+# create table with module labels / colors. Keep in order of increasing mod #
+table = data.frame(mod = unique(moduleLabels$moduleLabels), modColor = unique(moduleColors))
+table = table[order(as.integer(gsub("M","",table$mod))),]
+# specify # genes in each module
+modGenes = vector(mode="list",length = nrow(table))
+for (i in 1:nrow(table)) {
+    modGenes[[i]] = sum(table$modColor[i] == moduleColors) }
+table = cbind(table, modGenes = as.integer(modGenes))
+# specify % of module genes relative to all genes
+modGenesRatio = as.numeric(modGenes)/nrow(counts)
+table = cbind(table, modSizeRatio = round(100*modGenesRatio,2))
+# use gene symbols if it's easier than IDs
+genes = geneSymbol$symbol[match(rownames(moduleLabels),geneSymbol$id)]
+# identify module hub genes, with |kme| >= 0.9 ... very non-elegant, but works for now
+hubGenes = vector(mode="list", length=ncol(kme))
+NoHubGenes = vector(mode="list",length=ncol(kme))
+for (i in 1:ncol(kme)) {
+    hubGenes[[i]] = genes[which(abs(kme[,i]) >= 0.9)]
+    NoHubGenes[[i]] = length(hubGenes[[i]]) }
+names(hubGenes) = gsub("kme","M",colnames(kme))
+# specify module hub genes + their ratio relative to module size
+table = cbind(table,hubGenes = as.integer(NoHubGenes))
+table = table %>% mutate(hubGenesRatio = round(100*hubGenes/modGenes,2))
+
+# ------------------------------------------------------
+#  MODULE-FEATURE CORRELATION
+# ------------------------------------------------------
+
+# define # genes and samples
+nGenes = ncol(t(dataset))
+nSamples = nrow(t(dataset))
+# recalculate MEs with color labels
+MEs0 = moduleEigengenes(t(dataset),t(moduleColors))$eigengenes
+MEs1 = orderMEs(MEs0)
+rownames(MEs1) = rownames(MEs)
+MEs = MEs1
+rm(MEs1)
+
+## —— [OPTIONAL]: change feature entries into numerical
+
+# correlate using appropriate method
+modTraitCor = stats::cor(MEs, cov, method="spearman", use = "complete.obs")
+modTraitCor = stats::cor(MEs, cov, method="pearson", use = "complete.obs")
+modTraitCor = naRemove(bicor(MEs, cov, use="p", robustY = F, maxPOutliers = 0.1))
+# get corresponding pVal
+modTraitP = corPvalueStudent(modTraitCor, nSamples)
+
+# Generate a graphical representation to read in the table.
+# Color code each association by the correlation value and display correlations as well as p-values
+textMatrix = paste(signif(modTraitCor, 2), "\n(",signif(modTraitP, 1), ")", sep = "")
+dim(textMatrix) = dim(modTraitCor)
+
+# Time to plot!!!
+# Display the correlation values within a heatmap plot
